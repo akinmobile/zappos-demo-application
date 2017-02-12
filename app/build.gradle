@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.demo.demoapplication"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    productFlavors {
+        devFlavour {
+            applicationId "com.demo.demoapplication.dev"
+            buildConfigField 'String', 'BASE_API', '"http://api.zappos.com/"'
+            buildConfigField 'String', 'API_KEY', '"b743e26728e16b81da139182bb2094357c31d331"'
+
+        }
+        liveFlavour {
+            applicationId "com.demo.demoapplication.live"
+            buildConfigField 'String', 'BASE_API', '"http://api.zappos.com/"'
+            buildConfigField 'String', 'API_KEY', '"b743e26728e16b81da139182bb2094357c31d331"'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+
+
+    testCompile 'junit:junit:4.12'
+}
